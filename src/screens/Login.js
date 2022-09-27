@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useState} from 'react';
-import { View, Text, Image, StyleSheet} from 'react-native';
+import { View, Image, StyleSheet} from 'react-native';
 import { TextInput, Stack, Button } from "@react-native-material/core";
 import Logo from '../../assets/images/LogoDietapplus.png';
 
@@ -14,7 +14,8 @@ import {
     BackdropSubheader,
     AppBar,
     IconButton,
-    HStack
+    HStack,
+    Text
   } from "@react-native-material/core";
   import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -27,6 +28,7 @@ const SignInScreen: () => Node = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const Tab = createMaterialTopTabNavigator();
+    const [revealed, setRevealed] = useState(false);
 
     function onAuthStateChanged(user) {
         setUser(user);
@@ -100,13 +102,43 @@ const SignInScreen: () => Node = () => {
 
       
       return (
-        <NavigationContainer>
-            <AppBar title="Dietapp" />
+
+        <Backdrop
+        revealed={revealed}
+        header={
+            <AppBar
+            title="Dietapp"
+            transparent
+            leading={props => (
+                <IconButton
+                icon={props => (
+                    <Icon name={revealed ? "close" : "bars"} {...props} />
+                )}
+                onPress={() => setRevealed(prevState => !prevState)}
+                {...props}
+                />
+            )}
+            />
+        }
+        backLayer={<View style={{ height: 120 }} />}
+        >
+            <BackdropSubheader title="Wellcome" >
+                <Text >{ user.email }</Text>
+            </BackdropSubheader>
+            <NavigationContainer>
             <Tab.Navigator>
                 <Tab.Screen name="Daily Weight" component={Register} />
                 <Tab.Screen name="Profile" component={Profile} />
             </Tab.Navigator>
         </NavigationContainer>
+        </Backdrop>
+        /*<NavigationContainer>
+            <AppBar title="Dietapp" />
+            <Tab.Navigator>
+                <Tab.Screen name="Daily Weight" component={Register} />
+                <Tab.Screen name="Profile" component={Profile} />
+            </Tab.Navigator>
+        </NavigationContainer>*/
       );
     
 
