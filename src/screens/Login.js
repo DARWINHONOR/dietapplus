@@ -16,6 +16,7 @@ import {
     IconButton,
     HStack
   } from "@react-native-material/core";
+  import Icon from 'react-native-vector-icons/FontAwesome';
 
 //export const LoginContext = createContext();
 
@@ -76,18 +77,19 @@ const SignInScreen: () => Node = () => {
                     label="Username"
                     value={email}
                     onChangeText={text => setEmail(text)}
-                    /*trailing={props => (
-                        <IconButton icon={props => <Icon name="eye" {...props} />} {...props} />
-                    )}*/
+                    trailing={props => (
+                        /*<IconButton icon={props => <Icon name="eye" {...props} />} {...props} />*/
+                        <Icon name="user" size={20} color="#ccc" />
+                    )}
                     />
                     <TextInput style={styles.item}
                     label="Password"
                     value={password}
                     onChangeText={text => setPassword(text)}
                     secureTextEntry
-                    /*trailing={props => (
-                        <IconButton icon={props => <Icon name="eye" {...props} />} {...props} />
-                    )}*/
+                    trailing={props => (
+                        <Icon name="eye" size={20} color="#ccc"/>
+                    )}
                     />
                     <Button onPress={onSignInPressed} title="Sign In" style={styles.button}></Button>
                     <Button variant='text' title="Forgot passsword?"></Button>
