@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import { FlatList, View, StyleSheet, Image} from 'react-native';
 
-import { Button, Text, Divider } from "@react-native-material/core";
+import { Button, Text, Divider, AppBar } from "@react-native-material/core";
 
 import firestore from '@react-native-firebase/firestore'
 import storage from '@react-native-firebase/storage';
+import auth from '@react-native-firebase/auth';
 
 const App = () => {
 //{ navigation }
+
   const [user, setUser] = useState([]);
 
   /**LLAMADA A LA BD */
@@ -38,7 +40,7 @@ const App = () => {
 
   const ItemUser = ( {item} ) => {
     return (
-      <View>
+      <View style={styles.fondo}>
         <Image style={styles.image} source={{uri: item.photo}}  />
         <View style={styles.container} >
           <Text  variant='h4'>{item.name}</Text>
@@ -47,17 +49,17 @@ const App = () => {
           <Text style={styles.label}>Fecha de Nacimiento: </Text><Text> 02/01/1986{/*item.date_of_birth.toString()*/}</Text>
         </View>   
         <View style={styles.container}>
-          <Text style={styles.label}>Peso Inicial: </Text><Text> {item.weight} Kg</Text>
+          <Text style={styles.label}>Peso Inicial: </Text><Text> {item.initial_weight} Kg</Text>
         </View>
         <View style={styles.container}>  
           <Text style={styles.label}>Altura Inicial: </Text><Text>{item.height} mts</Text>
         </View>
         <View style={styles.container}>  
-          <Text style={styles.label}>IMC: </Text><Text>{Math.round(item.weight / (item.height * item.height)).toFixed(2)} </Text>
+          <Text style={styles.label}>IMC: </Text><Text>{Math.round(item.initial_weight / (item.height * item.height)).toFixed(2)} </Text>
         </View>
         <View style={{ backgroundColor:'#F44336', padding:15}} >
           <Text variant='subtitle1' style={{ textAlign:'justify', marginBottom:10, color:'#FFCDD2' }}>
-            Tomando en cuenta su peso y estatura, se calculÃ³ el indice de masa corporal IMC, cuyo resultado apunta a que usted se encuentra con 
+            Tomando en cuenta su peso y estatura, se calculó el indice de masa corporal IMC, cuyo resultado apunta a que usted se encuentra con 
           </Text>
           <Text variant='h6' style={{ textAlign:'center',color:'#FFCDD2' }}>Sobrepeso</Text>
         </View>
@@ -65,12 +67,20 @@ const App = () => {
       </View>
     )
   }
-
+  
+  const logoff = () => {
+    auth()
+    .signOut()
+    .then(() => console.log('User signed out!'));
+}
   return (
+    <View>
+    <Button onPress={logoff} title="Salir"></Button>
     <FlatList 
       data={user}
       renderItem={ItemUser}
     />
+    </View>
   )    
 };
 
