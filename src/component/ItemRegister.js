@@ -1,15 +1,20 @@
-import { ListItem, Divider } from '@react-native-material/core';
+import { ListItem, Divider, Text } from '@react-native-material/core';
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native'; 
+import {View, StyleSheet, Image} from 'react-native'; 
+import Logo from '../../assets/images/LogoDietapplus.png';
 
 const ItemRegister = ({item}) => {
     return (
         <View style={styles.card}>
-            <View style={{backgroundColor: '#ccc'}} >
+            <View style={styles.containerLogo}>
+              <Text style={styles.logo}>{item.weight} </Text>
+              <Text style={{ color: "#fff", fontSize: 20, marginTop: -50 }}>Kg</Text>
+            </View>
+            <View style={{backgroundColor: '#ccc', borderTopRightRadius:15, borderTopLeftRadius:15}} >
                 <Image style={styles.image} source={{uri: item.photo}}  />
             </View>  
-            <View style={{alignItems: 'center'}} >
-                <Text  style={{ fontWeight:'bold', fontSize: 15 }} >{item.fecha}</Text>
+            <View style={{alignItems: 'center', backgroundColor: '#fff'}} >
+                <Text  style={{ fontWeight:'bold', fontSize: 20 }} >{item.fecha}</Text>
             </View>  
             <ListItem 
                 title="Desayuno"
@@ -31,7 +36,6 @@ const ItemRegister = ({item}) => {
                 title="Ejercicio"
                 secondaryText={ item.ejercicio }
             />
-            <Divider style={{ marginTop: 60 }} leadingInset={16} />
       </View>
     );
 }
@@ -51,11 +55,32 @@ const styles = StyleSheet.create({
       height: 150
     },
     card:{
-      //padding:10
+      backgroundColor: 'transparent'
     },
     flatlist:{
       margin:5,
       backgroundColor: "#fff"
+    },
+    logo: {
+      width: 150,
+      height: 150,
+      borderRadius: 75,
+      backgroundColor: "#fff",
+      //borderColor: '#ccc',
+      //borderWidth: 1,
+      fontSize: 40,
+      fontWeight:'bold',
+      color: "#fff",
+      textAlign:'center',
+      backgroundColor:"#FF5722",
+      textAlignVertical:'center'
+    },
+    containerLogo:{
+      alignItems: 'center',
+      margin: 10,
+      marginBottom: -50,
+      zIndex: 1,
+      elevation: 20,
     }
   });
 

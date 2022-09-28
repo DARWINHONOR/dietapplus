@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useState} from 'react';
-import { View, Image, StyleSheet} from 'react-native';
+import { View, Image, StyleSheet, ImageBackground} from 'react-native';
 import { TextInput, Stack, Button } from "@react-native-material/core";
 import Logo from '../../assets/images/LogoDietapplus.png';
 
@@ -122,15 +122,14 @@ const SignInScreen: () => Node = () => {
         }
         backLayer={<View style={{ height: 120 }} />}
         >
-            <BackdropSubheader title="Wellcome" >
-                <Text >{ user.email }</Text>
+            <BackdropSubheader title={"Wellcome : " + user.email} >
             </BackdropSubheader>
             <NavigationContainer>
-            <Tab.Navigator>
-                <Tab.Screen name="Daily Weight" component={Register} />
-                <Tab.Screen name="Profile" component={Profile} />
-            </Tab.Navigator>
-        </NavigationContainer>
+                <Tab.Navigator>
+                    <Tab.Screen name="Daily Weight" component={Register} />
+                    <Tab.Screen name="Profile" component={Profile} />
+                </Tab.Navigator>
+            </NavigationContainer>
         </Backdrop>
         /*<NavigationContainer>
             <AppBar title="Dietapp" />

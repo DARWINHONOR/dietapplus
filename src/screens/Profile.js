@@ -41,7 +41,10 @@ const App = () => {
   const ItemUser = ( {item} ) => {
     return (
       <View style={styles.fondo}>
-        <Image style={styles.image} source={{uri: item.photo}}  />
+        <View style={styles.containerLogo}>
+          <Image style={styles.logo} source={{uri: item.photo}}  />
+        </View>
+        
         <View style={styles.container} >
           <Text  variant='h4'>{item.name}</Text>
         </View>  
@@ -94,9 +97,18 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: 'space-between'
   },
-  image:{
-    height: 350,
-    width: 400
+  logo: {
+    width: 250,
+    height: 250,
+    borderRadius: 125,
+    backgroundColor: "#fff",
+    borderColor: '#ccc',
+    borderWidth: 1
+  },
+  containerLogo:{
+    alignItems: 'center',
+    marginTop: 10,
+    elevation: 20
   }
 });
 
