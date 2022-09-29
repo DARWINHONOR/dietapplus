@@ -14,7 +14,7 @@ const App = () => {
 
   /**LLAMADA A LA BD */
   useEffect(() => {
-    getUserInfo()
+  getUserInfo()
   }, []);
 
   const getUserInfo = () => {

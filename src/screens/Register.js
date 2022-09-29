@@ -52,12 +52,12 @@ const App = () => {
 
       <Fab
         bg='#ccc'
-        placement='top-left'
+        placement='bottom-right'
         icon={
         <Icon
         color="white"
         as={FontAwesome}
-        name="arrow-left"
+        name="plus"
         />
         }
 
