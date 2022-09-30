@@ -7,6 +7,7 @@ import auth from '@react-native-firebase/auth';
 
 import Profile from './Profile';
 import Register from './Register';
+import Exit from './Close';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {
@@ -19,6 +20,9 @@ import {
   } from "@react-native-material/core";
   import Icon from 'react-native-vector-icons/FontAwesome';
 
+  import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
+  import Imagen from '../../assets/images/fondo1.png'
+
 //export const LoginContext = createContext();
 
 const SignInScreen: () => Node = () => {
@@ -29,6 +33,8 @@ const SignInScreen: () => Node = () => {
     const [password, setPassword] = useState();
     const Tab = createMaterialTopTabNavigator();
     const [revealed, setRevealed] = useState(false);
+
+    
 
     function onAuthStateChanged(user) {
         setUser(user);
@@ -102,8 +108,9 @@ const SignInScreen: () => Node = () => {
 
       
       return (
-
+        <ImageBackground source={Imagen} resizeMode='cover' style={{ width:'100%', height: '100%' }} >
         <Backdrop
+        style={{ backgroundColor: 'transparent' }}
         revealed={revealed}
         header={
             <AppBar
@@ -112,7 +119,7 @@ const SignInScreen: () => Node = () => {
             leading={props => (
                 <IconButton
                 icon={props => (
-                    <Icon name={revealed ? "close" : "bars"} {...props} />
+                    <Icon name={revealed ? "close" : "eye"} {...props} />
                 )}
                 onPress={() => setRevealed(prevState => !prevState)}
                 {...props}
@@ -120,17 +127,21 @@ const SignInScreen: () => Node = () => {
             )}
             />
         }
-        backLayer={<View style={{ height: 120 }} />}
+        backLayer={
+            <View style={{ height: 120, alignItems:'center' }} ><Text style={{ color:"#fff", fontSize:20}}>Confía en tí !!</Text></View>
+         }
         >
             <BackdropSubheader title={"Wellcome : " + user.email} >
             </BackdropSubheader>
             <NavigationContainer>
-                <Tab.Navigator>
-                    <Tab.Screen name="Daily Weight" component={Register} />
-                    <Tab.Screen name="Profile" component={Profile} />
-                </Tab.Navigator>
+                <Drawer.Navigator initialRouteName="Register">
+                    <Drawer.Screen name="Daily Weigth" component={Register} />
+                    <Drawer.Screen name="Profile" component={Profile} />
+                    <Drawer.Screen name="Exit" component={Exit} />
+                </Drawer.Navigator>
             </NavigationContainer>
         </Backdrop>
+        </ImageBackground>
         /*<NavigationContainer>
             <AppBar title="Dietapp" />
             <Tab.Navigator>
@@ -179,5 +190,7 @@ const styles =  StyleSheet.create({
         padding: 7
     }
 });
+
+const Drawer = createDrawerNavigator();
 
 export default SignInScreen;

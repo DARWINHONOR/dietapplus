@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { FlatList, View, StyleSheet, Image} from 'react-native';
 
-import { Button, Text, Divider, AppBar } from "@react-native-material/core";
+import { Button, Text, Divider, AppBar, ListItem } from "@react-native-material/core";
 
 import firestore from '@react-native-firebase/firestore'
 import storage from '@react-native-firebase/storage';
@@ -42,47 +42,44 @@ const App = () => {
     return (
       <View style={styles.fondo}>
         <View style={styles.containerLogo}>
-          <Image style={styles.logo} source={{uri: item.photo}}  />
+          <Image style={styles.logo} source={{uri: item.photo}}  resizeMode="cover" />
         </View>
-        
-        <View style={styles.container} >
-          <Text  variant='h4'>{item.name}</Text>
+        <View style={{alignItems: 'center', backgroundColor: '#fff', paddingTop:10}} >
+            <Text  style={{ fontWeight:'bold', fontSize: 25 }} >{item.name}</Text>
         </View>  
-        <View style={styles.container}>
-          <Text style={styles.label}>Fecha de Nacimiento: </Text><Text> 02/01/1986{/*item.date_of_birth.toString()*/}</Text>
-        </View>   
-        <View style={styles.container}>
-          <Text style={styles.label}>Peso Inicial: </Text><Text> {item.initial_weight} Kg</Text>
-        </View>
-        <View style={styles.container}>  
-          <Text style={styles.label}>Altura Inicial: </Text><Text>{item.height} mts</Text>
-        </View>
-        <View style={styles.container}>  
-          <Text style={styles.label}>IMC: </Text><Text>{Math.round(item.initial_weight / (item.height * item.height)).toFixed(2)} </Text>
-        </View>
-        <View style={{ backgroundColor:'#F44336', padding:15}} >
-          <Text variant='subtitle1' style={{ textAlign:'justify', marginBottom:10, color:'#FFCDD2' }}>
-            Tomando en cuenta su peso y estatura, se calculó el indice de masa corporal IMC, cuyo resultado apunta a que usted se encuentra con 
-          </Text>
-          <Text variant='h6' style={{ textAlign:'center',color:'#FFCDD2' }}>Sobrepeso</Text>
-        </View>
+        <ListItem
+            title="Fecha de Nacimiento"
+            secondaryText={ "12/05/1988" }
+        />
+        <ListItem 
+            title="Peso Inicial"
+            secondaryText={ item.initial_weight }
+        />
+        <ListItem 
+            title="Altura"
+            secondaryText={ item.height }
+        />
+        <ListItem 
+            title="Indice de Masa Corporal IMC"
+            secondaryText={Math.round(item.initial_weight / (item.height * item.height)).toFixed(2)}
+        />
+        <ListItem 
+            title="Diagnostico"
+            secondaryText={ "Tomando en cuenta su peso y estatura, se calculó el indice de masa corporal IMC, cuyo resultado apunta a que usted se encuentra con Sobrepeso" }
+        />
+        
 
       </View>
     )
   }
   
-  const logoff = () => {
-    auth()
-    .signOut()
-    .then(() => console.log('User signed out!'));
-}
   return (
     <View>
-    <Button onPress={logoff} title="Salir"></Button>
-    <FlatList 
-      data={user}
-      renderItem={ItemUser}
-    />
+    
+      <FlatList 
+        data={user}
+        renderItem={ItemUser}
+      />
     </View>
   )    
 };
@@ -98,16 +95,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   logo: {
-    width: 250,
+    width: 400,
     height: 250,
-    borderRadius: 125,
+    /*borderRadius: 125,
     backgroundColor: "#fff",
     borderColor: '#ccc',
-    borderWidth: 1
+    borderWidth: 1*/
   },
   containerLogo:{
     alignItems: 'center',
-    marginTop: 10,
+    //marginTop: 10,
     elevation: 20
   }
 });
