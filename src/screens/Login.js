@@ -21,7 +21,7 @@ import {
   import Icon from 'react-native-vector-icons/FontAwesome';
 
   import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
-  import Imagen from '../../assets/images/fondo1.png'
+  import Imagen from '../../assets/images/fondo5.png'
 
 //export const LoginContext = createContext();
 
