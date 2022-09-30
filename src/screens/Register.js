@@ -8,8 +8,10 @@ import firestore from '@react-native-firebase/firestore'
 import storage from '@react-native-firebase/storage';
 import ItemRegister from '../component/ItemRegister';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const App = () => {
+const App = ({navigation}) => {
 //{ navigation }
   const [register, setRegister] = useState([]);
 
@@ -51,13 +53,14 @@ const App = () => {
     <View>
 
       <Fab
-        bg='#ccc'
+        bg='#448AFF'
         placement='bottom-right'
         icon={
         <Icon
         color="white"
         as={FontAwesome}
         name="plus"
+        onPress={ () => navigation.navigate('Create Register')}
         />
         }
 

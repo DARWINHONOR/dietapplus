@@ -7,6 +7,7 @@ import auth from '@react-native-firebase/auth';
 
 import Profile from './Profile';
 import Register from './Register';
+import RegisterCreate from './RegisterCreate';
 import Exit from './Close';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -22,6 +23,10 @@ import {
 
   import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
   import Imagen from '../../assets/images/fondo5.png'
+
+  import { createStackNavigator } from '@react-navigation/stack';
+
+  
 
 //export const LoginContext = createContext();
 
@@ -106,6 +111,16 @@ const SignInScreen: () => Node = () => {
         );
       }
 
+      const StackN = createStackNavigator();
+      function RegisterScreen() {
+        return (
+          <StackN.Navigator>
+            <StackN.Screen name="Register" component={Register} options={{ headerShown: false }} />
+            <StackN.Screen name="Create Register" component={RegisterCreate} options={{ headerShown: false }} />
+          </StackN.Navigator>
+        );
+      }
+
       
       return (
         <ImageBackground source={Imagen} resizeMode='cover' style={{ width:'100%', height: '100%' }} >
@@ -135,7 +150,7 @@ const SignInScreen: () => Node = () => {
             </BackdropSubheader>
             <NavigationContainer>
                 <Drawer.Navigator initialRouteName="Register">
-                    <Drawer.Screen name="Daily Weigth" component={Register} />
+                    <Drawer.Screen name="Daily Weigth" component={RegisterScreen} />
                     <Drawer.Screen name="Profile" component={Profile} />
                     <Drawer.Screen name="Exit" component={Exit} />
                 </Drawer.Navigator>
@@ -190,6 +205,8 @@ const styles =  StyleSheet.create({
         padding: 7
     }
 });
+
+
 
 const Drawer = createDrawerNavigator();
 
